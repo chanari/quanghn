@@ -1,4 +1,6 @@
-class ShortLinksController < ApplicationController
+class Api::V1::ShortLinksController < Api::ApplicationController
+  before_action :authenticate!
+
   def create
   end
 
