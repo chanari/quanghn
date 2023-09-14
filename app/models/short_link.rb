@@ -1,6 +1,9 @@
 class ShortLink < ApplicationRecord
   belongs_to :user
 
-  validates :short_path, format: { with: /\A[a-zA-Z]{6}\z/ }, uniqueness: true
-  validates :original_url, uniqueness: { scope: :user_id }
+  SHORT_PATH_FORMAT = /\A[a-zA-Z0-9]{5}\z/
+  ORIGINAL_URL_FORMAT = /\A#{URI::regexp(%w(http https))}\z/i
+
+  validates :short_path, format: { with: SHORT_PATH_FORMAT }, uniqueness: true
+  validates :original_url, uniqueness: { scope: :user_id }, format: { with: ORIGINAL_URL_FORMAT }
 end

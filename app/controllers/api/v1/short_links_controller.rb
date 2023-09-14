@@ -2,11 +2,8 @@ class Api::V1::ShortLinksController < Api::ApplicationController
   before_action :authenticate!
 
   def create
-  end
+    short_path = GenerateShortenService.call(@current_user, params[:original_url])
 
-  private
-
-  def short_links_params
-    params.require(:short_links).permit(:source_link, )
+    render json: { short_link: short_link_url(short_path) }, status: :created
   end
 end
