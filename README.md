@@ -3,22 +3,68 @@
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
-Things you may want to cover:
+- Docker + docker-compose:
+  ```bash
+  docker-compose build
+  docker-compose up
+  ```
 
-* Ruby version
+DEMO: https://quanghn.onrender.com
 
-* System dependencies
+APIs
+- Sign up
+  ```http
+  POST /api/users
+  ```
+  Body
+  ```json
+  {
+    "user": {
+      "email": "quanghn@mail.com",
+      "name": "quang",
+      "password": "123123"
+    }
+  }
+  ```
+  Response
+  ```json
+  {
+    "email": "quanghn@mail.com",
+    "access_token": "xxx"
+  }
+  ```
 
-* Configuration
+- Log in
+  ```http
+  POST /api/users/log_in
+  ```
+  Body
+  ```json
+  {
+    "email": "quanghn@mail.com",
+    "password": "123123"
+  }
+  ```
+  Response
+  ```json
+  {
+    "access_token": "xxx"
+  }
+  ```
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- Shorten generate
+  ```http
+  POST /api/v1/short_links
+  ```
+  Body
+  ```json
+  {
+    "original_url": "https://google.com"
+  }
+  ```
+  Response
+  ```json
+  {
+    "short_link": "https://quanghn.onrender.com/PTlS9"
+  }
+  ```
