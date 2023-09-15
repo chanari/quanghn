@@ -1,7 +1,7 @@
 module Authenticator
   extend ActiveSupport::Concern
 
-  HMAC_SECRET = Rails.application.secrets.secret_key_base
+  HMAC_SECRET = Rails.application.secret_key_base
 
   def auth_header
     request.headers['Authorization']
@@ -16,6 +16,7 @@ module Authenticator
     token = auth_header.split(' ')[1]
     JWT.decode(token, HMAC_SECRET)[0]
   rescue JWT::ExpiredSignature, JWT::VerificationError, JWT::DecodeError, StandardError => e
+    Rails.logger.info(e.message)
     raise ExceptionHandler::AuthenticationError, e.message
   end
 
