@@ -1,0 +1,7 @@
+<% if @current_user.nil? %>
+  <%= link_to 'Sign in', add_params("#{ENV['OAUTH_PROVIDER_URL']}/oauth/authorize", client_id: ENV['OAUTH_CLIENT_ID'], response_type: 'code', redirect_uri: ENV['OAUTH_PROVIDER_CALLBACK']) %>
+<% else %>
+  <h2>Hello <%= @current_user.email %></h2>
+  <%= link_to 'Applications', '/oauth/applications' %> &nbsp;&nbsp; | &nbsp;&nbsp;
+  <%= link_to 'Log out', destroy_user_session_path, data: { turbo_method: :delete } %>
+<% end %>

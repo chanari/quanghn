@@ -12,4 +12,7 @@ Rails.application.routes.draw do
   end
 
   get '/:short_path', to: 'short_links#show', as: 'short_link'
+  get '/oauth/callback', to: 'home#callback'
+
+  root 'home#index'
 end
